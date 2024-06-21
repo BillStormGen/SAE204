@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% endblock %}</title>
+
+    <link rel="stylesheet" type="text/css" href="{%static 'domoticapp/index.css' %}">
+</head>
+
+<body>
+
+    {% block header %}
+    <header class="header">
+        <h1 class="site-title"><a href="/">DomotiqueRT</a></h1>
+        <nav class="navigation">
+            <ul>
+                <li><a href="/domotic">Capteur</a></li>
+            </ul>
+        </nav>
+    </header>
+    {% endblock %}
+
+    <main class="container">
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <footer class="footer">
+        <p>&copy;2024 LANS Auxane - SCHERMESSER Evan - TRAG Marcelin</p>
+    </footer>
+</body>
+</html>
