@@ -7,6 +7,7 @@
     <title>{% block title %}{% endblock %}</title>
 
     <link rel="stylesheet" type="text/css" href="{%static 'domoticapp/index.css' %}">
+
 </head>
 
 <body>
@@ -30,5 +31,12 @@
     <footer class="footer">
         <p>&copy;2024 LANS Auxane - SCHERMESSER Evan - TRAG Marcelin</p>
     </footer>
+
+    <script>
+        // Rafraîchir la page toutes les 30 secondes
+        setTimeout(function(){
+            window.location.reload(1);
+        }, 30000);
+    </script>
 </body>
 </html>

@@ -1,11 +1,44 @@
+<!-- domotic.html -->
 {% extends "domoticapp/capteur/template.html" %}
 
 {% block title %} DomotiqueRT {% endblock %}
 
 {% block content %}
-    <h1> Température</h1>
-
-
-
-
+    <h1>Données par Capteur</h1>
+    <div class="container">
+        <form method="get" action="{% url 'filtrer_donnees' %}">
+            {{ form.as_p }}
+            <button type="submit">Filtrer</button>
+        </form>
+        {% for capteur, donnees in donnees_par_capteur.items %}
+        <div class="capteur-card">
+            <h2>Capteur: {{ capteur.id_capteur }}</h2>
+            <h3>{{ capteur.maison }} - {{ capteur.piece }}</h3>
+            <a href="#">Modifier</a>
+            <a href="#" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce capteur?');">Supprimer</a>
+            {% if donnees %}
+            <table class="donnee-table">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Heure</th>
+                        <th>Température (°C)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for donnee in donnees %}
+                    <tr>
+                        <td>{{ donnee.date }}</td>
+                        <td>{{ donnee.heure }}</td>
+                        <td>{{ donnee.temperature }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% else %}
+            <p>Aucune donnée disponible pour ce capteur.</p>
+            {% endif %}
+        </div>
+        {% endfor %}
+    </div>
 {% endblock %}

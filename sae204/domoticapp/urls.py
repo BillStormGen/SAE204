@@ -6,5 +6,6 @@ from django.urls import path
 urlpatterns = [
     #path('index/', views.index),
     path('', views.index),
-    path('domotic/', views.domotic)
+    path('domotic/', views.domotic),
+    path('donnees/filtrer/', views.filtrer_donnees, name='filtrer_donnees'),
 ]
