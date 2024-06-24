@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from .models import *
 from .forms import *
+from django.http import HttpResponseRedirect
 
 # Create your views here.
 
@@ -65,3 +66,28 @@ def filtrer_donnees(request):
     }
 
     return render(request, 'domoticapp/capteur/domotic.html', context)
+
+
+def update_capteur(request, id):
+    capteur = Capteur.objects.get(id=id)
+    form = UpdateCapteurForm(instance=capteur)
+
+    return render(request, 'domoticapp/capteur/update.html', {'form': form, 'capteur': capteur})
+
+
+def update_capteur_process(request, id):
+    capteur = Capteur.objects.get(id=id)
+    form = UpdateCapteurForm(request.POST)
+
+    if form.is_valid():
+        capteur = form.save()
+        capteur.id = id
+        capteur.save()
+        return HttpResponseRedirect('/domotic/')
+    return render(request, 'domoticapp/capteur/update.html', {'form': form, 'capteur': capteur})
+
+
+def delete_capteur(request, id):
+    capteur = Capteur.objects.get(id=id)
+    capteur.delete()
+    return HttpResponseRedirect('/domotic/')

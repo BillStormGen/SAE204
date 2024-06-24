@@ -14,8 +14,8 @@
         <div class="capteur-card">
             <h2>Capteur: {{ capteur.id_capteur }}</h2>
             <h3>{{ capteur.maison }} - {{ capteur.piece }}</h3>
-            <a href="#">Modifier</a>
-            <a href="#" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce capteur?');">Supprimer</a>
+            <a href="/capteur/update/{{ capteur.id }}/">Modifier</a>
+            <a href="/capteur/delete/{{ capteur.id }}/">Supprimer</a>
             {% if donnees %}
             <table class="donnee-table">
                 <thead>

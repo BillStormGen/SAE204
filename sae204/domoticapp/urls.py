@@ -8,4 +8,7 @@ urlpatterns = [
     path('', views.index),
     path('domotic/', views.domotic),
     path('donnees/filtrer/', views.filtrer_donnees, name='filtrer_donnees'),
+    path('capteur/update/<int:id>/', views.update_capteur, name='update_capteur'),
+    path('capteur/update_process/<int:id>/', views.update_capteur_process, name='update_capteur'),
+    path('capteur/delete/<int:id>/', views.delete_capteur, name='delete_capteur'),
 ]
