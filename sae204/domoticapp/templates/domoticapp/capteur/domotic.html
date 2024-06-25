@@ -16,6 +16,8 @@
             <h3>{{ capteur.maison }} - {{ capteur.piece }}</h3>
             <a href="/capteur/update/{{ capteur.id }}/">Modifier</a>
             <a href="/capteur/delete/{{ capteur.id }}/">Supprimer</a>
+            <a href="/export/capteur/">Télécharger Capteur CSV</a>
+            <a href="/export/donnee/">Télécharger Donnee CSV</a>
             {% if donnees %}
             <table class="donnee-table">
                 <thead>

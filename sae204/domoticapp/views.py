@@ -1,7 +1,9 @@
 from django.shortcuts import render
 from .models import *
 from .forms import *
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
+import csv
+
 
 # Create your views here.
 
@@ -91,3 +93,32 @@ def delete_capteur(request, id):
     capteur = Capteur.objects.get(id=id)
     capteur.delete()
     return HttpResponseRedirect('/domotic/')
+
+
+def export_capteur_csv(request):
+    # Créer la réponse HTTP avec le type de contenu CSV
+    response = HttpResponse(content_type='text/csv')
+    response['Content-Disposition'] = 'attachment; filename="capteur.csv"'
+
+    writer = csv.writer(response)
+    writer.writerow(['maison', 'piece', 'id_capteur'])
+
+    capteurs = Capteur.objects.all().values_list('maison', 'piece', 'id_capteur')
+    for capteur in capteurs:
+        writer.writerow(capteur)
+
+    return response
+
+def export_donnee_csv(request):
+    # Créer la réponse HTTP avec le type de contenu CSV
+    response = HttpResponse(content_type='text/csv')
+    response['Content-Disposition'] = 'attachment; filename="donnee.csv"'
+
+    writer = csv.writer(response)
+    writer.writerow(['date', 'heure', 'temperature', 'id_capteur'])
+
+    donnees = Donnee.objects.all().values_list('date', 'heure', 'temperature', 'id_capteur_id')
+    for donnee in donnees:
+        writer.writerow(donnee)
+
+    return response
